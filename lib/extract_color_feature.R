@@ -31,7 +31,7 @@ for (i in (1:length(y_cat))) {
 # this would be train labels.
 writeMat("y.mat", y_catexport = y_cat)
 
-##########################################################################
+########################################################################## RGB
 
 source("http://bioconductor.org/biocLite.R")
 biocLite()
@@ -45,8 +45,8 @@ rBin <- seq(0, 1, length.out=nR)
 gBin <- seq(0, 1, length.out=nG)
 bBin <- seq(0, 1, length.out=nB)
 
-# create feature files
-rgb_feature <- list()
+## create feature files
+#rgb_feature <- list()
 for (i in (1:length(dir_names))) {
         #print(i)
         img <- readImage(paste("./images/", dir_names[i], sep = ""))
@@ -62,5 +62,66 @@ for (i in (1:length(dir_names))) {
         # create a new folder named "color_feature", which is in the same directory as images folder.
         writeMat(paste("./color_feature/", name, ".mat", sep = ""), rgb_featureexport = rgb_feature)
 }
+
+########################################################################## HSV
+library(grDevices)
+nH <- 10
+nS <- 6
+nV <- 6
+hBin <- seq(0, 1, length.out=nH)
+sBin <- seq(0, 1, length.out=nS)
+vBin <- seq(0, 0.005, length.out=nV)
+
+for (i in (1:length(dir_names))) {
+        print(i)
+        img <- readImage(paste("./images/", dir_names[i], sep = ""))
+        mat <- imageData(img)
+        mat_rgb <- mat
+        dim(mat_rgb) <- c(nrow(mat)*ncol(mat), 3)
+        mat_hsv <- rgb2hsv(t(mat_rgb))
+        freq_hsv <- as.data.frame(table(factor(findInterval(mat_hsv[1,], hBin), levels=1:nH), 
+                                        factor(findInterval(mat_hsv[2,], sBin), levels=1:nS), 
+                                        factor(findInterval(mat_hsv[3,], vBin), levels=1:nV)))
+        hsv_feature <- as.numeric(freq_hsv$Freq)/(ncol(mat)*nrow(mat)) # normalization
+        name <- unlist(strsplit(dir_names[i], "[.]"))[1]
+        # create a new folder named "HSV_color_feature", which is in the same directory as images folder.
+        writeMat(paste("./HSV_color_feature/", name, ".mat", sep = ""), hsv_featureexport = hsv_feature)
+}
+
+
+########################################################################## Spatial
+
+N <- 3 # number of bins in x-axis
+M <- 5 # number of bins in y-axis
+p_x <- p_y <- 250
+xbin <- floor(seq(0, p_x, length.out= N+1))
+ybin <- seq(0, p_y, length.out=M+1)
+
+
+construct_rgb_feature <- function(X){
+        freq_rgb <- as.data.frame(table(factor(findInterval(X[,,1], rBin), levels=1:nR), 
+                                        factor(findInterval(X[,,2], gBin), levels=1:nG), 
+                                        factor(findInterval(X[,,3], bBin), levels=1:nB)))
+        rgb_feature <- as.numeric(freq_rgb$Freq)/(ncol(X)*nrow(X))
+        return(rgb_feature)
+}
+
+for (i in (1:length(dir_names))) {
+        print(i)
+        img <- readImage(paste("./images/", dir_names[i], sep = ""))
+        img_s <- resize(img, p_x, p_y)
+        scf <- rep(NA, N*M*nR*nG*nB)
+        for(k in 1:N){
+                for(j in 1:M){
+                        tmp <- img_s[(xbin[k]+1):xbin[k+1], (ybin[j]+1):ybin[j+1], ]
+                        scf[((M*(k-1)+j-1)*nR*nG*nB+1):((M*(k-1)+j)*nR*nG*nB)] <- construct_rgb_feature(tmp) 
+                }
+        }
+        name <- unlist(strsplit(dir_names[i], "[.]"))[1]
+        # create a new folder named "spatial_color_feature", which is in the same directory as images folder.
+        writeMat(paste("./spatial_color_feature/", name, ".mat", sep = ""), scfexport = scf)
+}
+
+
 
 
