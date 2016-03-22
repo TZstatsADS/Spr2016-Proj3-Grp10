@@ -28,4 +28,4 @@ plot(as.numeric(ss)~seq(1:d),xlab='the number of components',ylab='proportion of
 ##if we choose 400 principal components and get new features n*400
 new_features<-x%*%(pc$rotation[,1:400])
 
-save(new_features,file="new_features.RData")
+save(new_features,m,pc,file="new_features.RData")
