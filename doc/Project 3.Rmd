@@ -36,6 +36,7 @@ The baseline model we're using is a straightforward SVM using color histograms a
   <IMG SRC="Model_selection_plan.jpg" float = "right" ALT="image">
   </span>
 </div>
+<br>&nbsp;<br>
 
 ### Image processing
 
