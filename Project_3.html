@@ -118,11 +118,7 @@ $(document).ready(function () {
 
 <div id="cat-and-dog-classification" class="section level2">
 <h2>Cat and Dog Classification</h2>
-<p>For this project, our goal was to find an approach to classifying a collection of images featuring dogs and cats that was better than a currently existing baseline model.</p>
-<div id="baseline-model" class="section level3">
-<h3>Baseline Model</h3>
-<div id="linear-svm" class="section level4">
-<h4>Linear SVM</h4>
+<p>For this project, our goal was to find an approach to classifying a collection of images featuring dogs and cats that was better than a currently existing baseline model, an SVM using color histograms for feature selection.</p>
 <!--
 Function used to find error rates:
 
@@ -153,8 +149,6 @@ err.linear <- function(train.x, train.y, cost, K){
 This figure represents the resulting error rates after training and testing. We see that as the margin parameter increases, the error rate of classification increases as well, although not to a significant extent. Nonetheless, we could choose our optimal cost (lambda parameter) to be 25 if we were to continue using an SVM to classify these images.
 
 -->
-</div>
-</div>
 <div id="our-pipeline" class="section level3">
 <h3>Our Pipeline:</h3>
 <div style="text-align: center;">
@@ -212,7 +206,7 @@ This figure represents the resulting error rates after training and testing. We 
 <div id="sift" class="section level3">
 <h3>SIFT</h3>
 <p>We chose to use scale invariant feature transformation (SIFT) as the feature detector and descriptor for image analysis.</p>
-<p>The key challenge was to find a good balance between accuracy (# of keypoints/visual features) and time efficiency. The more keypoints we chose to keep, the higher the computational cost. But if we didn’t keep enough keypoints, they wouldn’t sufficiently represent the features we need to detect. For our base case, we decided on 25 keypoints per image.</p>
+<p>The key challenge was to find a good balance between accuracy (# of keypoints/visual features) and time efficiency. The more keypoints we chose to keep, the higher the computational cost. But if we didn’t keep enough keypoints, they wouldn’t sufficiently represent the features we need to detect.</p>
 <div style="text-align: center;">
 <span style="float:left;width: 50%;"> <IMG SRC="./fig/No_Edge_Detector.png" float="right" ALT="image"> </span> <span style="float:right;width: 50%;"> <IMG SRC="./fig/Edge_Detector.png" float="left" ALT="image"> </span>
 </div>
@@ -235,7 +229,7 @@ This figure represents the resulting error rates after training and testing. We 
 <span style="float:left;width: 100%;"> <IMG SRC="./fig/Mini_Batch_Kmeans.png" float="right" ALT="image"> </span>
 </div>
 <p><br> <br></p>
-<p>Setting keypoints = 300, we again looked at the optimal number of clusters to use and found that many of the machine learning algorithms reached a performance peak at # of clusters = 150. Note that at # of clusters = 300, the performance of each algorithm generally stabilizes. This is intuitive since each cluster would only have one keypoint and so any number of clusters above 300 is trivial. (Also note that we are not sure why SVM in this situation behaved the way it did.)</p>
+<p>Setting number of keypoints = 300, we again looked at the optimal number of clusters to use and found that many of the machine learning algorithms reached a performance peak at # of clusters = 150. Note that at number of clusters = 300, the performance of each algorithm generally stabilizes. This is intuitive since after the number of clusters surpasses the number of keypoints, the continued increase of clusters becomes rather trivial. (Note: we are not sure why SVM spiked so high after 200 clusters…)</p>
 <div style="text-align: center;">
 <span style="float:left;width: 100%;"> <IMG SRC="./fig/Cluster_Acc_25.png" float="right" ALT="image"> </span>
 </div>
@@ -244,7 +238,7 @@ This figure represents the resulting error rates after training and testing. We 
 </div>
 <div id="model-selection-testing" class="section level3">
 <h3>Model selection + Testing</h3>
-<p>The graph below shows the classification accuracy using 5 k-fold cross validation. We can see that in almost all test cases, random forest (RF) outperformed all other models.</p>
+<p>The graph below shows the classification accuracy using 5-fold cross validation. We can see that in almost all test cases, random forest (RF) outperformed all other models.</p>
 <ul>
 <li>Random forest had an average of 73.25% accuracy</li>
 <li>AdaBoost had an average of 72.11% accuracy</li>
@@ -254,23 +248,44 @@ This figure represents the resulting error rates after training and testing. We 
 <span style="float:left;width: 100%;"> <IMG SRC="./fig/R_Accuracy.png" float="right" ALT="image"> </span>
 </div>
 <p><br> <br></p>
-<p>We chose random forest for several reasons: 1) It had the highest average accuracy and 2) we know that random forests reduce the variance of the model which helps us avoid the issues that come with overfitting. We are sacrificing longer training periods for improved model performance compared to the baseline model.</p>
+<p>We chose random forest for several reasons:</p>
+<ol style="list-style-type: decimal">
+<li>It had the highest average accuracy</li>
+<li>We know that random forests reduce the variance of the model which helps us avoid the issues that come with overfitting</li>
+</ol>
+<p>We are sacrificing longer training periods for improved model performance compared to the baseline model.</p>
 </div>
 <div id="final-model" class="section level3">
 <h3>Final Model</h3>
+<div id="performance-improvement" class="section level4">
+<h4>Performance improvement</h4>
+<p>Average accuracy for SVM + color histogram: 67.73%<br />* Average accuracy for SVM + SIFT: 72.73%<br />Average accuracy for random forest + SIFT: 74.01%</p>
 </div>
-<div id="performance-improvement" class="section level3">
-<h3>Performance improvement</h3>
-<p>Average Accuracy for SVM: 0.68024585130518866</p>
+<div id="running-cost-tradeoff" class="section level4">
+<h4>Running cost tradeoff</h4>
+<p>Average training and testing time for SVM + color histogram: 70.10 seconds<br />* Average training and testing time for SVM + SIFT: 20.34 seconds =&gt; 3.5x time improvement over the baseline<br />Average training and testing time for random forest + SIFT: 254.54 seconds =&gt; 3.6x WORSE time cost than the baseline</p>
 </div>
-<div id="running-cost-tradeoff" class="section level3">
-<h3>Running cost tradeoff</h3>
-<p>Average Train, Test time for SVM: 0.44722166061401369</p>
-<p>Average time for SIFT : 254.54186606407166</p>
-<p>Average time for Kmeans: 2.0315157890319826</p>
 </div>
 <div id="conclusion-future-improvements" class="section level3">
 <h3>Conclusion &amp; Future Improvements</h3>
+<p>Our baseline model for this project was a linear SVM using RGB color histograms, which provided us with an error rate of around 31%. From there, we looked at many image processing methods that would improve our feature selection and ultimately settled on using SIFT (scale invariant feature transformation) on black and white, blurred photos with edge detection. In the end, 300 keypoints were chosen for our visual vocabulary of 150 clusters. We proceeded to compare the accuracy rates of six machine learning algorithms on these features using 5-fold cross validation. We found that random forests had the lowest error rate of 26%, but ran much slower than the baseline SVM. Another model using an SVM with features from SIFT, which we’ve added to the previous performance and running cost analyses (*), had a relatively low error rate as well but ran much faster than the SVM with color histogram. However, we decided to prioritize accuracy over running cost and ultimately chose random forests over the faster SVM + SIFT because of 1) the stability of random forest and 2) due to some of the concerns we had with SVM (see clustering graph).</p>
+<div id="time-improvements" class="section level4">
+<h4>Time Improvements</h4>
+<ul>
+<li>Producing a Haar cascade classifier which would reduce image dimension</li>
+<li>PCA or LDA, also for dimension reduction on visual vocabulary</li>
+</ul>
+</div>
+<div id="accuracy-improvements" class="section level4">
+<h4>Accuracy Improvements</h4>
+<ul>
+<li>Using Gaussian mixture models (GMM) rather than k-means</li>
+<li>Normalizing images during processing</li>
+<li>Producing a more accurage Haar cascade classifier to allow for facial recognition</li>
+<li>Add color histograms in addition to data</li>
+<li>Obtain a larger sample of training images that are cropped to faces</li>
+</ul>
+</div>
 </div>
 </div>
 

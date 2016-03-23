@@ -6,10 +6,8 @@ output: html_document
 ---
 
 ## Cat and Dog Classification
-For this project, our goal was to find an approach to classifying a collection of images featuring dogs and cats that was better than a currently existing baseline model. 
+For this project, our goal was to find an approach to classifying a collection of images featuring dogs and cats that was better than a currently existing baseline model, an SVM using color histograms for feature selection. 
 
-### Baseline Model
-#### Linear SVM
 <!--
 Function used to find error rates:
 ```{r}
@@ -163,7 +161,7 @@ You can see from these comparisons that after adding the blurring effects, edge 
 ### SIFT
 We chose to use scale invariant feature transformation (SIFT) as the feature detector and descriptor for image analysis. 
 
-The key challenge was to find a good balance between accuracy (# of keypoints/visual features) and time efficiency. The more keypoints we chose to keep, the higher the computational cost. But if we didn't keep enough keypoints, they wouldn't sufficiently represent the features we need to detect. For our base case, we decided on 25 keypoints per image.
+The key challenge was to find a good balance between accuracy (# of keypoints/visual features) and time efficiency. The more keypoints we chose to keep, the higher the computational cost. But if we didn't keep enough keypoints, they wouldn't sufficiently represent the features we need to detect. 
 
 <div style = "text-align: center;">
   <span style="float:left;width: 50%;">
@@ -206,7 +204,7 @@ However, we used a variation of k-means in which we took mini-batches, i.e. Mini
 </div>
 <br>&nbsp;<br>
 
-Setting keypoints = 300, we again looked at the optimal number of clusters to use and found that many of the machine learning algorithms reached a performance peak at # of clusters = 150. Note that at # of clusters = 300, the performance of each algorithm generally stabilizes. This is intuitive since each cluster would only have one keypoint and so any number of clusters above 300 is trivial. (Also note that we are not sure why SVM in this situation behaved the way it did.)
+Setting number of keypoints = 300, we again looked at the optimal number of clusters to use and found that many of the machine learning algorithms reached a performance peak at # of clusters = 150. Note that at number of clusters = 300, the performance of each algorithm generally stabilizes. This is intuitive since after the number of clusters surpasses the number of keypoints, the continued increase of clusters becomes rather trivial. (Note: we are not sure why SVM spiked so high after 200 clusters...)
 
 <div style = "text-align: center;">
   <span style="float:left;width: 100%;">
@@ -218,8 +216,7 @@ Setting keypoints = 300, we again looked at the optimal number of clusters to us
 **Optimal number of clusters = 150**
 
 ### Model selection + Testing
-
-The graph below shows the classification accuracy using 5 k-fold cross validation. We can see that in almost all test cases, random forest (RF) outperformed all other models. 
+The graph below shows the classification accuracy using 5-fold cross validation. We can see that in almost all test cases, random forest (RF) outperformed all other models. 
 
 + Random forest had an average of 73.25% accuracy
 + AdaBoost had an average of 72.11% accuracy
@@ -232,19 +229,35 @@ The graph below shows the classification accuracy using 5 k-fold cross validatio
 </div>
 <br>&nbsp;<br>
 
-We chose random forest for several reasons: 1) It had the highest average accuracy and 2) we know that random forests reduce the variance of the model which helps us avoid the issues that come with overfitting. We are sacrificing longer training periods for improved model performance compared to the baseline model.
+We chose random forest for several reasons:
+
+1. It had the highest average accuracy
+2. We know that random forests reduce the variance of the model which helps us avoid the issues that come with overfitting
+
+We are sacrificing longer training periods for improved model performance compared to the baseline model.
 
 ### Final Model
 
-### Performance improvement
-Average Accuracy for SVM: 0.68024585130518866
+#### Performance improvement
+Average accuracy for SVM + color histogram: 67.73%  
+* Average accuracy for SVM + SIFT: 72.73%  
+Average accuracy for random forest + SIFT: 74.01%  
 
-### Running cost tradeoff
-Average Train, Test time for SVM: 0.44722166061401369
-
-Average time for SIFT : 254.54186606407166
-
-Average time for Kmeans: 2.0315157890319826
+#### Running cost tradeoff
+Average training and testing time for SVM + color histogram: 70.10 seconds  
+* Average training and testing time for SVM + SIFT: 20.34 seconds => 3.5x time improvement over the baseline  
+Average training and testing time for random forest + SIFT: 254.54 seconds => 3.6x WORSE time cost than the baseline  
 
 ### Conclusion & Future Improvements
+Our baseline model for this project was a linear SVM using RGB color histograms, which provided us with an error rate of around 31%. From there, we looked at many image processing methods that would improve our feature selection and ultimately settled on using SIFT (scale invariant feature transformation) on black and white, blurred photos with edge detection. In the end, 300 keypoints were chosen for our visual vocabulary of 150 clusters. We proceeded to compare the accuracy rates of six machine learning algorithms on these features using 5-fold cross validation. We found that random forests had the lowest error rate of 26%, but ran much slower than the baseline SVM. Another model using an SVM with features from SIFT, which we've added to the previous performance and running cost analyses (*), had a relatively low error rate as well but ran much faster than the SVM with color histogram. However, we decided to prioritize accuracy over running cost and ultimately chose random forests over the faster SVM + SIFT because of 1) the stability of random forest and 2) due to some of the concerns we had with SVM (see clustering graph). 
 
+#### Time Improvements
++ Producing a Haar cascade classifier which would reduce image dimension
++ PCA or LDA, also for dimension reduction on visual vocabulary 
+
+#### Accuracy Improvements
++ Using Gaussian mixture models (GMM) rather than k-means
++ Normalizing images during processing
++ Producing a more accurage Haar cascade classifier to allow for facial recognition
++ Add color histograms in addition to data
++ Obtain a larger sample of training images that are cropped to faces
