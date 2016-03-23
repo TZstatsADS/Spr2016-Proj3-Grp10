@@ -1,37 +1,29 @@
-#########################################################
-### Train a classification model with training images ###
-#########################################################
 
-### Author: Yuting Ma
-### Project 3
-### ADS Spring 2016
-
-
-train <- function(dat_train, label_train, par=NULL){
+train <- function(dat_train, label_train) {
   
-  ### Train a Gradient Boosting Model (GBM) using processed features from training images
+  library(e1071)
+  require(caret)
+  require(ggplot2)
+  require(randomForest)
+  library(randomForest)
+  label_train <- as.factor(label_train)
   
-  ### Input: 
-  ###  -  processed features from images 
-  ###  -  class labels for training images
-  ### Output: training model specification
+  # color features + SVM = worst
+  color_feature<-dat_train[,1:800]
+  svm_linear<-svm(color_feature,label_train,type ='C',kernel ='linear',cost=1,gamma =0)
   
-  ### load libraries
-  library("gbm")
+  # SIFT features + RF = best
   
-  ### Train with gradient boosting model
-  if(is.null(par)){
-    depth <- 3
-  } else {
-    depth <- par$depth
-  }
-  fit_gbm <- gbm.fit(x=dat_train, y=label_train,
-                     n.trees=2000,
-                     distribution="bernoulli",
-                     interaction.depth=depth, 
-                     bag.fraction = 0.5,
-                     verbose=FALSE)
-  best_iter <- gbm.perf(fit_gbm, method="OOB")
-
-  return(list(fit=fit_gbm, iter=best_iter))
+  
+  ##Random Forest(with crossvalidation and SIFT feature)
+  sift<-dat_train[,801:950]
+  rf_model<-randomForest(x=sift,y=label_train)
+  
+  model=list()
+  model$svm<-svm_linear
+  model$rf<-rf_model
+  
+  return(model)
 }
+# label_train<-rep(1,2000)
+# label_train[2]<-0
