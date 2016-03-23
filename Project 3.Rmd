@@ -1,7 +1,7 @@
 ---
 title: "Group 10 Project 3"
-date: "March 23, 2016"
 author: "Weihan Li, Aoyuan Liao, Robert Minnich, Tara Shui, Yusen Wang"
+date: "March 23, 2016"
 output: html_document
 ---
 
