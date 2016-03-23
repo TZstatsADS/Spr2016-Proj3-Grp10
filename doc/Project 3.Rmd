@@ -27,7 +27,7 @@ The baseline model we're using is a straightforward SVM using color histograms a
 + Average accuracy for SVM + color histogram: 67.73%
 + Average training and testing time for SVM + color histogram: 70.10 seconds
 
-But we can do better!!
+**But we can do better!!**
 
 ### Our Pipeline:
 
@@ -41,6 +41,25 @@ But we can do better!!
 
 #### Cropped Images
 Cropped images were chosen for several reasons. For one, cropping reduces the computation time for training by decreasing the amount of data that is required to process an image. Second, and one of the most important, in order for us to create our visual vocabulary (codebook), we wanted our model to be very accurate and we knew that the main difference between cats and dogs are their facial features. One drawback from this method, however, was that we also had to limit the number of images we could train from. Also, the image split between cats and dogs was around 23 : 67, which could lead to bias in our results.
+
+<div style = "text-align: center;">
+  <span style="float:left;width: 50%;">
+  <IMG SRC="boxer_129.jpg" height = "200px" width = "200px">
+  </span>
+  <span style="float:right;width: 50%;">
+  <IMG SRC="boxer_129crop.jpg" height = "200px" width = "200px">
+  </span>
+</div>
+<br>&nbsp;<br>
+<div style = "text-align: center;">
+  <span style="float:left;width: 50%;">
+    <b>Full image</b>
+  </span>
+  <span style="float:right;width: 50%;">
+    <b>Cropped image</b>
+  </span>
+</div>
+<br>&nbsp;<br> 
 
 #### Haar Cascade Classifiers
 Haar cascade classifiers take trained masks (black and white pixels) and use them for pattern recognition within an image. This is the method used in many face-detection programs (Facebook, your camera, etc.) as well as the method used in the infamous Viola-Jones face detection paper. 
