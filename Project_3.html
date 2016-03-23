@@ -119,36 +119,21 @@ $(document).ready(function () {
 <div id="cat-and-dog-classification" class="section level2">
 <h2>Cat and Dog Classification</h2>
 <p>For this project, our goal was to find an approach to classifying a collection of images featuring dogs and cats that was better than a currently existing baseline model, an SVM using color histograms for feature selection.</p>
-<!--
-Function used to find error rates:
-
-```r
-err.linear <- function(train.x, train.y, cost, K){
-  ix <- sample(1 : length(train.y))
-  begin <- 1 + seq(0, K - 1) * round(length(train.y) / K)
-  end <- begin + round(length(train.y) / K) - 1
-  len <- length(cost)
-  err <- rep(0, len)
-  for (i in 1 : len){
-    for (k in 1 : K){
-      test.ix <- ix[begin[k] : end[k]]
-      train.ix <- ix[-(begin[k] : end[k])]
-      m <- svm(train.x[train.ix, ], train.y[train.ix], type = 'C',
-             kernel = 'linear', cost = cost[i],gamma = 0)
-      y_hat <- predict(m, train.x[test.ix, ])
-      err[i] <- err[i] + sum(y_hat != train.y[test.ix]) / length(train.y[test.ix])
-    }
-  } 
-  err <- err / K
-  return(err)
-}
-```
-#### Error Rates
-![image](./fig/Linear_SVM_Results.png)
-
-This figure represents the resulting error rates after training and testing. We see that as the margin parameter increases, the error rate of classification increases as well, although not to a significant extent. Nonetheless, we could choose our optimal cost (lambda parameter) to be 25 if we were to continue using an SVM to classify these images.
-
--->
+<div id="baseline-model" class="section level3">
+<h3>Baseline Model</h3>
+<div id="linear-svm-with-color-histogram" class="section level4">
+<h4>Linear SVM with Color Histogram</h4>
+The baseline model we’re using is a straightforward SVM using color histograms as the feature selection. An example of the image processing and resulting features from one image is as follows:
+<div style="width: 100%">
+<span style="float: left; width: 40%;"> <IMG SRC="./fig/dog_histogram.png"> </span> <span style="float: left; width: 20%;"> <IMG SRC="./fig/arrow.png"> </span> <span style="float: right; width: 40%;"> <IMG SRC="./fig/Histogram.png"> </span> <br style="clear: left;" />
+</div>
+<ul>
+<li>Average accuracy for SVM + color histogram: 67.73%</li>
+<li>Average training and testing time for SVM + color histogram: 70.10 seconds</li>
+</ul>
+<p>But we can do better!!</p>
+</div>
+</div>
 <div id="our-pipeline" class="section level3">
 <h3>Our Pipeline:</h3>
 <div style="text-align: center;">
@@ -159,7 +144,7 @@ This figure represents the resulting error rates after training and testing. We 
 <h3>Image processing</h3>
 <div id="cropped-images" class="section level4">
 <h4>Cropped Images</h4>
-<p>Cropped images were chosen in for several reasons. For one, cropping reduces the computation time for training by decreasing the amount of data that is required to process an image. Second, and one of the most important, in order for us to create our visual vocabulary (codebook), we wanted our model to be very accurate and we knew that the main difference between cats and dogs are their facial features. One drawback from this method, however, was that we also had to limit the number of images we could train from. Also, the image split between cats and dogs was around 23 : 67, which could lead to bias in our results.</p>
+<p>Cropped images were chosen for several reasons. For one, cropping reduces the computation time for training by decreasing the amount of data that is required to process an image. Second, and one of the most important, in order for us to create our visual vocabulary (codebook), we wanted our model to be very accurate and we knew that the main difference between cats and dogs are their facial features. One drawback from this method, however, was that we also had to limit the number of images we could train from. Also, the image split between cats and dogs was around 23 : 67, which could lead to bias in our results.</p>
 </div>
 <div id="haar-cascade-classifiers" class="section level4">
 <h4>Haar Cascade Classifiers</h4>
