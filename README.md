@@ -1,5 +1,9 @@
 # Project CatsDogs: Predictive analytics-model evaluation and selection
 
+# Group 10: Weihan Li, Aoyuan Liao, Robert Minnich, Tara Shui, Yusen Wang
+
+Please see doc folder for our presentation file, Project_3.html
+
 #### - for cats versus dogs image data
 
 Read [full project description](doc/project3_desc.md)
