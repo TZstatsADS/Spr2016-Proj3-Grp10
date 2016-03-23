@@ -25,3 +25,5 @@ train <- function(dat_train, label_train) {
   
   return(model)
 }
+# label_train<-rep(1,2000)
+# label_train[2]<-0
