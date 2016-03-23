@@ -1,11 +1,18 @@
 
+
 train <- function(dat_train, label_train) {
-  
+
+
+  install.packages("e1071")
+  install.packages("caret")
+  install.packages("randomForest")
+  install.packages("ggplot2")
   library(e1071)
   require(caret)
   require(ggplot2)
   require(randomForest)
   library(randomForest)
+  
   label_train <- as.factor(label_train)
   
   # color features + SVM = worst
@@ -25,5 +32,5 @@ train <- function(dat_train, label_train) {
   
   return(model)
 }
-# label_train<-rep(1,2000)
-# label_train[2]<-0
+
+
