@@ -1,52 +1,29 @@
 ---
 title: "Group 10 Project 3"
 date: "March, 23, 2016"
+author: "Weihan Li, Aoyuan Liao, Robert Minnich, Tara Shui, Yusen Wang"
 output: html_document
 ---
 
 ## Cat and Dog Classification
+For this project, our goal was to find an approach to classifying a collection of images featuring dogs and cats that was better than a currently existing base case model. 
 
-### Baseline Model
+### Base Case Model
 #### Linear SVM
+Function used to find error rates:
 ```{r}
-# Load packages
-library(e1071)
-
-# Load data
-load("./data/COLOR_FEATURE.RData")
-load("./data/y_cat.RData")
-load("./data/dir_names.RData")
-
-# Clean data
-index <- sample(1 : length(y_cat), length(y_cat))
-y <- y_cat[index]
-x <- color_feature[index, ]
-
-# Set up classification parameters
-n <- length(y)
-train.n <- round(0.8 * n)
-train.ix <- sort(sample(1 : n, train.n))
-train.x <- x[train.ix, ]
-test.x <- x[-train.ix, ]
-train.y <- as.factor(y[train.ix])
-test.y <- as.factor(y[-train.ix])
-cost <- 2 ^ seq(-10, 10, 1)
-# cost <- c(25) # This was the best cost we found
-gamma <- 10 ^ (-5 : -1)
-
-# Linear SVM Error Rate
-err.linear <- function(train.x, train.y, cost, K) {
+err.linear <- function(train.x, train.y, cost, K){
   ix <- sample(1 : length(train.y))
-  begin <- 1 + seq(0,K-1) * round(length(train.y) / K)
+  begin <- 1 + seq(0, K - 1) * round(length(train.y) / K)
   end <- begin + round(length(train.y) / K) - 1
   len <- length(cost)
   err <- rep(0, len)
-  for (i in 1 : len) {
-    for (k in 1 : K) {
+  for (i in 1 : len){
+    for (k in 1 : K){
       test.ix <- ix[begin[k] : end[k]]
       train.ix <- ix[-(begin[k] : end[k])]
       m <- svm(train.x[train.ix, ], train.y[train.ix], type = 'C',
-             kernel = 'linear', cost = cost[i], gamma = 0)
+             kernel = 'linear', cost = cost[i],gamma = 0)
       y_hat <- predict(m, train.x[test.ix, ])
       err[i] <- err[i] + sum(y_hat != train.y[test.ix]) / length(train.y[test.ix])
     }
@@ -54,65 +31,51 @@ err.linear <- function(train.x, train.y, cost, K) {
   err <- err / K
   return(err)
 }
-
-# Linear SVM
-err_lin <- err.linear(train.x, train.y , cost, 5)
-plot(cost, err_lin, type = "l") # Plots error rate for a linear svm versus cost
-best_cost <- cost[which.min(err_lin)]
-svm_linear <- svm(train.x, train.y, type = 'C', kernel ='linear', cost = cost, gamma = 0)
-y1 <- predict(svm_linear, test.x)
-
-cost
-sum(y1 != test.y) / length(test.y) 
 ```
+#### Error Rates
+![image](./fig/Linear_SVM_Results.png)
 
-### Our Improved Model
+This figure represents the resulting error rates after training and testing. We see that as the margin parameter increases, the error rate of classification increases as well, although not to a significant extent. Nonetheless, we could choose our optimal cost (lambda parameter) to be 25 if we were to continue using an SVM to classify these images.
 
-#### Approach
+
+### Our Pipeline:
 ![image](./fig/Model_selection_plan.jpg)
+
+#### Image processing
 ```{r}
 
 ```
-##### Feature extraction
+**Note: ** We used the full image to train and the full image to test throughout the project.
+
+#### SIFT
+We chose to use scale invariant feature transformation (SIFT) as the feature detector and descriptor for image analysis. 
+
+The key challenge was to find a good balance between accuracy (# of keypoints/visual features) and time efficiency. The more keypoints we chose to keep, the higher the computational cost. But if we didn't keep enough keypoints, they wouldn't sufficiently represent the features we need to detect. For our base case, we decided on 25 keypoints per image.
+
+SIFT with edge detection:
+![image](./fig/No_Edge_Detector.png)
+
+SIFT with no edge detection:
+![image](./fig/Edge_Detector.png)
+
+
 ```{r}
 
 ```
-##### Model training
+#### K-Means Clustering + Binning
+We chose to use k-means clustering to produce the visual vocabulary (codebook) because other better-performing clustering algorithms are often too slow and too memory-intensive. K-means sufficiently reduces the space of the data in a relatively fast and robust way.
+**Number of clusters = 20**
+
 ```{r}
 
 ```
-##### Classification
-```{r}
+#### Model selection + Testing
 
-```
+#### Final Model
+
 #### Performance improvement
 
 #### Running cost tradeoff
 
 ### Conclusion
 
-
-
-
-
-
-
-
-
-
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r}
-summary(cars)
-```
-
-You can also embed plots, for example:
-
-```{r, echo=FALSE}
-plot(cars)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
