@@ -1,0 +1,81 @@
+---
+title: "Group 10 Project 3"
+date: "March, 23, 2016"
+author: "Weihan Li, Aoyuan Liao, Robert Minnich, Tara Shui, Yusen Wang"
+output: html_document
+---
+
+## Cat and Dog Classification
+For this project, our goal was to find an approach to classifying a collection of images featuring dogs and cats that was better than a currently existing base case model. 
+
+### Base Case Model
+#### Linear SVM
+Function used to find error rates:
+```{r}
+err.linear <- function(train.x, train.y, cost, K){
+  ix <- sample(1 : length(train.y))
+  begin <- 1 + seq(0, K - 1) * round(length(train.y) / K)
+  end <- begin + round(length(train.y) / K) - 1
+  len <- length(cost)
+  err <- rep(0, len)
+  for (i in 1 : len){
+    for (k in 1 : K){
+      test.ix <- ix[begin[k] : end[k]]
+      train.ix <- ix[-(begin[k] : end[k])]
+      m <- svm(train.x[train.ix, ], train.y[train.ix], type = 'C',
+             kernel = 'linear', cost = cost[i],gamma = 0)
+      y_hat <- predict(m, train.x[test.ix, ])
+      err[i] <- err[i] + sum(y_hat != train.y[test.ix]) / length(train.y[test.ix])
+    }
+  } 
+  err <- err / K
+  return(err)
+}
+```
+#### Error Rates
+![image](./fig/Linear_SVM_Results.png)
+
+This figure represents the resulting error rates after training and testing. We see that as the margin parameter increases, the error rate of classification increases as well, although not to a significant extent. Nonetheless, we could choose our optimal cost (lambda parameter) to be 25 if we were to continue using an SVM to classify these images.
+
+
+### Our Pipeline:
+![image](./fig/Model_selection_plan.jpg)
+
+#### Image processing
+```{r}
+
+```
+**Note: ** We used the full image to train and the full image to test throughout the project.
+
+#### SIFT
+We chose to use scale invariant feature transformation (SIFT) as the feature detector and descriptor for image analysis. 
+
+The key challenge was to find a good balance between accuracy (# of keypoints/visual features) and time efficiency. The more keypoints we chose to keep, the higher the computational cost. But if we didn't keep enough keypoints, they wouldn't sufficiently represent the features we need to detect. For our base case, we decided on 25 keypoints per image.
+
+SIFT with edge detection:
+![image](./fig/No_Edge_Detector.png)
+
+SIFT with no edge detection:
+![image](./fig/Edge_Detector.png)
+
+
+```{r}
+
+```
+#### K-Means Clustering + Binning
+We chose to use k-means clustering to produce the visual vocabulary (codebook) because other better-performing clustering algorithms are often too slow and too memory-intensive. K-means sufficiently reduces the space of the data in a relatively fast and robust way.
+**Number of clusters = 20**
+
+```{r}
+
+```
+#### Model selection + Testing
+
+#### Final Model
+
+#### Performance improvement
+
+#### Running cost tradeoff
+
+### Conclusion
+
