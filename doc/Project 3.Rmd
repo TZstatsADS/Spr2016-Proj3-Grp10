@@ -13,13 +13,13 @@ For this project, our goal was to find an approach to classifying a collection o
 The baseline model we're using is a straightforward SVM using color histograms as the feature selection. An example of the image processing and resulting features from one image is as follows:
 <div style = "width: 100%">
   <span style="float: left; width: 40%;">
-    <IMG SRC="./fig/dog_histogram.png">
+    <IMG SRC="dog_histogram.png">
   </span>
   <span style="float: left; width: 20%;">
-    <IMG SRC="./fig/arrow.png">
+    <IMG SRC="arrow.png">
   </span>
   <span style="float: right; width: 40%;">
-    <IMG SRC="./fig/Histogram.png">
+    <IMG SRC="Histogram.png">
   </span>
   <br style="clear: left;" />
 </div>
@@ -33,7 +33,7 @@ But we can do better!!
 
 <div style = "text-align: center;">
   <span style="float:left;width: 100%;">
-  <IMG SRC="./fig/Model_selection_plan.jpg" float = "right" ALT="image">
+  <IMG SRC="Model_selection_plan.jpg" float = "right" ALT="image">
   </span>
 </div>
 
@@ -47,10 +47,10 @@ Haar cascade classifiers take trained masks (black and white pixels) and use the
 
 <div style = "width: 100%">
   <span style="float: left; width: 50%;">
-    <IMG SRC="./fig/HaarFeatures.png">
+    <IMG SRC="HaarFeatures.png">
   </span>
   <span style="float: left; width: 50%;">
-    <IMG SRC="./fig/face_and_features.jpg">
+    <IMG SRC="face_and_features.jpg">
   </span>
   <br style="clear: left;" />
 </div>
@@ -71,39 +71,39 @@ A Haar cascade classifier was explored in order to automatically detect faces of
 <br>&nbsp;<br> 
 <div style = "width: 100%">
   <span style="float: left; width: 40%;">
-    <IMG SRC="./fig/Abyssinian_102.jpg" height = "200px" width = "200px">
+    <IMG SRC="Abyssinian_102.jpg" height = "200px" width = "200px">
   </span>
   <span style="float: left; width: 20%;">
-    <IMG SRC="./fig/arrow.png" height = "100px" width = "100px">
+    <IMG SRC="arrow.png" height = "100px" width = "100px">
   </span>
   <span style="float: right; width: 40%;">
-    <IMG SRC="./fig/Abyssinian_102f.jpg" height = "200px" width = "200px">
+    <IMG SRC="Abyssinian_102f.jpg" height = "200px" width = "200px">
   </span>
   <br style="clear: left;" />
 </div>
 <br>&nbsp;<br> 
 <div style = "width: 100%">
   <span style="float: left; width: 40%;">
-    <IMG SRC="./fig/chihuahua_103.jpg" height = "200px" width = "200px">
+    <IMG SRC="chihuahua_103.jpg" height = "200px" width = "200px">
   </span>
   <span style="float: left; width: 20%;">
-    <IMG SRC="./fig/arrow.png" height = "100px" width = "100px">
+    <IMG SRC="arrow.png" height = "100px" width = "100px">
   </span>
   <span style="float: left; width: 40%;">
-    <IMG SRC="./fig/chihuahua_103f.jpg" height = "200px" width = "200px">
+    <IMG SRC="chihuahua_103f.jpg" height = "200px" width = "200px">
   </span>
   <br style="clear: left;" />
 </div>
 <br>&nbsp;<br> 
 <div style = "width: 100%">
   <span style="float: left; width: 40%;">
-    <IMG SRC="./fig/scottish_terrier_133.jpg" height = "200px" width = "200px">
+    <IMG SRC="scottish_terrier_133.jpg" height = "200px" width = "200px">
   </span>
   <span style="float: left; width: 20%;">
-    <IMG SRC="./fig/arrow.png" height = "100px" width = "100px">
+    <IMG SRC="arrow.png" height = "100px" width = "100px">
   </span>
   <span style="float: left; width: 40%;">
-    <IMG SRC="./fig/scottish_terrier_133f.jpg" height = "200px" width = "200px">
+    <IMG SRC="scottish_terrier_133f.jpg" height = "200px" width = "200px">
   </span>
   <br style="clear: left;" />
 </div>
@@ -123,10 +123,10 @@ We investigated image blurring and edge detection in order to remove background 
 </div>
 <div style = "width: 100%">
   <span style="float: left; width: 50%;">
-    <IMG SRC="./fig/dog.png">
+    <IMG SRC="dog.png">
   </span>
   <span style="float: left; width: 50%;">
-    <IMG SRC="./fig/blurred_dog.png">
+    <IMG SRC="blurred_dog.png">
   </span>
   <br style="clear: left;" />
 </div>
@@ -140,10 +140,10 @@ We investigated image blurring and edge detection in order to remove background 
 </div>
 <div style = "width: 100%">
   <span style="float: left; width: 50%;">
-    <IMG SRC="./fig/dog_edges.png">
+    <IMG SRC="dog_edges.png">
   </span>
   <span style="float: left; width: 50%;">
-    <IMG SRC="./fig/dog_blurred_edges.png">
+    <IMG SRC="dog_blurred_edges.png">
   </span>
   <br style="clear: left;" />
 </div>
@@ -157,10 +157,10 @@ The key challenge was to find a good balance between accuracy (# of keypoints/vi
 
 <div style = "text-align: center;">
   <span style="float:left;width: 50%;">
-  <IMG SRC="./fig/No_Edge_Detector.png" float = "right" ALT="image">
+  <IMG SRC="No_Edge_Detector.png" float = "right" ALT="image">
   </span>
   <span style="float:right;width: 50%;">
-  <IMG SRC="./fig/Edge_Detector.png" float = "left" ALT="image">
+  <IMG SRC="Edge_Detector.png" float = "left" ALT="image">
   </span>
 </div>
 <div style = "text-align: center;">
@@ -177,7 +177,7 @@ To find the most optimal number of keypoints to work with, we arbitrarily chose 
 
 <div style = "text-align: center;">
   <span style="float:left;width: 100%;">
-  <IMG SRC="./fig/Keypoints_Acc_300.png" float = "right" ALT="image">
+  <IMG SRC="Keypoints_Acc_300.png" float = "right" ALT="image">
   </span>
 </div>
 <br>&nbsp;<br>
@@ -191,7 +191,7 @@ However, we used a variation of k-means in which we took mini-batches, i.e. Mini
 
 <div style = "text-align: center;">
   <span style="float:left;width: 100%;">
-  <IMG SRC="./fig/Mini_Batch_Kmeans.png" float = "right" ALT="image">
+  <IMG SRC="Mini_Batch_Kmeans.png" float = "right" ALT="image">
   </span>
 </div>
 <br>&nbsp;<br>
@@ -200,7 +200,7 @@ Setting number of keypoints = 300, we again looked at the optimal number of clus
 
 <div style = "text-align: center;">
   <span style="float:left;width: 100%;">
-  <IMG SRC="./fig/Cluster_Acc_25.png" float = "right" ALT="image">
+  <IMG SRC="Cluster_Acc_25.png" float = "right" ALT="image">
   </span>
 </div>
 <br>&nbsp;<br>
@@ -216,7 +216,7 @@ The graph below shows the classification accuracy using 5-fold cross validation.
 
 <div style = "text-align: center;">
   <span style="float:left;width: 100%;">
-  <IMG SRC="./fig/R_Accuracy.png" float = "right" ALT="image">
+  <IMG SRC="R_Accuracy.png" float = "right" ALT="image">
   </span>
 </div>
 <br>&nbsp;<br>

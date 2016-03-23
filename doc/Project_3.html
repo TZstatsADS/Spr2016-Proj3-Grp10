@@ -125,7 +125,7 @@ $(document).ready(function () {
 <h4>Linear SVM with Color Histogram</h4>
 The baseline model we’re using is a straightforward SVM using color histograms as the feature selection. An example of the image processing and resulting features from one image is as follows:
 <div style="width: 100%">
-<span style="float: left; width: 40%;"> <IMG SRC="./fig/dog_histogram.png"> </span> <span style="float: left; width: 20%;"> <IMG SRC="./fig/arrow.png"> </span> <span style="float: right; width: 40%;"> <IMG SRC="./fig/Histogram.png"> </span> <br style="clear: left;" />
+<span style="float: left; width: 40%;"> <IMG SRC="dog_histogram.png"> </span> <span style="float: left; width: 20%;"> <IMG SRC="arrow.png"> </span> <span style="float: right; width: 40%;"> <IMG SRC="Histogram.png"> </span> <br style="clear: left;" />
 </div>
 <ul>
 <li>Average accuracy for SVM + color histogram: 67.73%</li>
@@ -137,7 +137,7 @@ The baseline model we’re using is a straightforward SVM using color histograms
 <div id="our-pipeline" class="section level3">
 <h3>Our Pipeline:</h3>
 <div style="text-align: center;">
-<span style="float:left;width: 100%;"> <IMG SRC="./fig/Model_selection_plan.jpg" float="right" ALT="image"> </span>
+<span style="float:left;width: 100%;"> <IMG SRC="Model_selection_plan.jpg" float="right" ALT="image"> </span>
 </div>
 </div>
 <div id="image-processing" class="section level3">
@@ -150,7 +150,7 @@ The baseline model we’re using is a straightforward SVM using color histograms
 <h4>Haar Cascade Classifiers</h4>
 <p>Haar cascade classifiers take trained masks (black and white pixels) and use them for pattern recognition within an image. This is the method used in many face-detection programs (Facebook, your camera, etc.) as well as the method used in the infamous Viola-Jones face detection paper.</p>
 <div style="width: 100%">
-<span style="float: left; width: 50%;"> <IMG SRC="./fig/HaarFeatures.png"> </span> <span style="float: left; width: 50%;"> <IMG SRC="./fig/face_and_features.jpg"> </span> <br style="clear: left;" />
+<span style="float: left; width: 50%;"> <IMG SRC="HaarFeatures.png"> </span> <span style="float: left; width: 50%;"> <IMG SRC="face_and_features.jpg"> </span> <br style="clear: left;" />
 </div>
 <p>A Haar cascade classifier was explored in order to automatically detect faces of cats and dogs from a given image (with background). This method would then have been utilized to detect and crop any potential new images, which would have allowed us to extract features only from the face and ignore the rest of the image.</p>
 <div style="text-align: left;">
@@ -158,15 +158,15 @@ The baseline model we’re using is a straightforward SVM using color histograms
 </div>
 <br> <br>
 <div style="width: 100%">
-<span style="float: left; width: 40%;"> <IMG SRC="./fig/Abyssinian_102.jpg" height="200px" width="200px"> </span> <span style="float: left; width: 20%;"> <IMG SRC="./fig/arrow.png" height="100px" width="100px"> </span> <span style="float: right; width: 40%;"> <IMG SRC="./fig/Abyssinian_102f.jpg" height="200px" width="200px"> </span> <br style="clear: left;" />
+<span style="float: left; width: 40%;"> <IMG SRC="Abyssinian_102.jpg" height="200px" width="200px"> </span> <span style="float: left; width: 20%;"> <IMG SRC="arrow.png" height="100px" width="100px"> </span> <span style="float: right; width: 40%;"> <IMG SRC="Abyssinian_102f.jpg" height="200px" width="200px"> </span> <br style="clear: left;" />
 </div>
 <br> <br>
 <div style="width: 100%">
-<span style="float: left; width: 40%;"> <IMG SRC="./fig/chihuahua_103.jpg" height="200px" width="200px"> </span> <span style="float: left; width: 20%;"> <IMG SRC="./fig/arrow.png" height="100px" width="100px"> </span> <span style="float: left; width: 40%;"> <IMG SRC="./fig/chihuahua_103f.jpg" height="200px" width="200px"> </span> <br style="clear: left;" />
+<span style="float: left; width: 40%;"> <IMG SRC="chihuahua_103.jpg" height="200px" width="200px"> </span> <span style="float: left; width: 20%;"> <IMG SRC="arrow.png" height="100px" width="100px"> </span> <span style="float: left; width: 40%;"> <IMG SRC="chihuahua_103f.jpg" height="200px" width="200px"> </span> <br style="clear: left;" />
 </div>
 <br> <br>
 <div style="width: 100%">
-<span style="float: left; width: 40%;"> <IMG SRC="./fig/scottish_terrier_133.jpg" height="200px" width="200px"> </span> <span style="float: left; width: 20%;"> <IMG SRC="./fig/arrow.png" height="100px" width="100px"> </span> <span style="float: left; width: 40%;"> <IMG SRC="./fig/scottish_terrier_133f.jpg" height="200px" width="200px"> </span> <br style="clear: left;" />
+<span style="float: left; width: 40%;"> <IMG SRC="scottish_terrier_133.jpg" height="200px" width="200px"> </span> <span style="float: left; width: 20%;"> <IMG SRC="arrow.png" height="100px" width="100px"> </span> <span style="float: left; width: 40%;"> <IMG SRC="scottish_terrier_133f.jpg" height="200px" width="200px"> </span> <br style="clear: left;" />
 </div>
 <p>In the end, we decided not to use a Haar cascade classifier. It worked well with the cat images but for some reason did not pick up on dogs’ faces with the same level of accuracy.</p>
 </div>
@@ -177,13 +177,13 @@ The baseline model we’re using is a straightforward SVM using color histograms
 <span style="float:left;width: 50%;"> <b>Grayscale</b> </span> <span style="float:right;width: 50%;"> <b>Grayscale + Blur</b> </span>
 </div>
 <div style="width: 100%">
-<span style="float: left; width: 50%;"> <IMG SRC="./fig/dog.png"> </span> <span style="float: left; width: 50%;"> <IMG SRC="./fig/blurred_dog.png"> </span> <br style="clear: left;" />
+<span style="float: left; width: 50%;"> <IMG SRC="dog.png"> </span> <span style="float: left; width: 50%;"> <IMG SRC="blurred_dog.png"> </span> <br style="clear: left;" />
 </div>
 <div style="text-align: center;">
 <span style="float:left;width: 50%;"> <b>Edge detection</b> </span> <span style="float:right;width: 50%;"> <b>Edge detection + Blur</b> </span>
 </div>
 <div style="width: 100%">
-<span style="float: left; width: 50%;"> <IMG SRC="./fig/dog_edges.png"> </span> <span style="float: left; width: 50%;"> <IMG SRC="./fig/dog_blurred_edges.png"> </span> <br style="clear: left;" />
+<span style="float: left; width: 50%;"> <IMG SRC="dog_edges.png"> </span> <span style="float: left; width: 50%;"> <IMG SRC="dog_blurred_edges.png"> </span> <br style="clear: left;" />
 </div>
 <p>You can see from these comparisons that after adding the blurring effects, edge detection was still able to pick up much of the area around the face but simplify the details in the rest of the image, especially the grassy area. In the end, we chose to use a combination of blurring and edge detection to improve our method of feature selection, SIFT.</p>
 </div>
@@ -193,7 +193,7 @@ The baseline model we’re using is a straightforward SVM using color histograms
 <p>We chose to use scale invariant feature transformation (SIFT) as the feature detector and descriptor for image analysis.</p>
 <p>The key challenge was to find a good balance between accuracy (# of keypoints/visual features) and time efficiency. The more keypoints we chose to keep, the higher the computational cost. But if we didn’t keep enough keypoints, they wouldn’t sufficiently represent the features we need to detect.</p>
 <div style="text-align: center;">
-<span style="float:left;width: 50%;"> <IMG SRC="./fig/No_Edge_Detector.png" float="right" ALT="image"> </span> <span style="float:right;width: 50%;"> <IMG SRC="./fig/Edge_Detector.png" float="left" ALT="image"> </span>
+<span style="float:left;width: 50%;"> <IMG SRC="No_Edge_Detector.png" float="right" ALT="image"> </span> <span style="float:right;width: 50%;"> <IMG SRC="Edge_Detector.png" float="left" ALT="image"> </span>
 </div>
 <div style="text-align: center;">
 <span style="float:left;width: 50%;"> <b>Sift with no edge detection</b> </span> <span style="float:right;width: 50%;"> <b>Sift with edge detection</b> </span>
@@ -201,7 +201,7 @@ The baseline model we’re using is a straightforward SVM using color histograms
 <p><br> <br></p>
 <p>To find the most optimal number of keypoints to work with, we arbitrarily chose the cluster size to be 25 and made a straightforward comparison of various machine learning algorithms and their performance levels between 0 and 400 keypoints. We found that a sufficient number of algorithms hit high points of accuracy at keypoints = 300, and thus chose to use 300 moving forward.</p>
 <div style="text-align: center;">
-<span style="float:left;width: 100%;"> <IMG SRC="./fig/Keypoints_Acc_300.png" float="right" ALT="image"> </span>
+<span style="float:left;width: 100%;"> <IMG SRC="Keypoints_Acc_300.png" float="right" ALT="image"> </span>
 </div>
 <p><br> <br></p>
 <p><strong>Optimal number of keypoints = 300</strong></p>
@@ -211,12 +211,12 @@ The baseline model we’re using is a straightforward SVM using color histograms
 <p>We wanted to use k-means clustering to produce the visual vocabulary (codebook) because other better-performing clustering algorithms are often too slow and too memory-intensive. K-means sufficiently reduces the space of the data in a relatively fast and robust way.</p>
 <p>However, we used a variation of k-means in which we took mini-batches, i.e. MiniBatchKMeans, to reduce computation time but largely maintain similar results. Mini batch k-means samples from the population and finds the centroid from that sample for each iteration. The figure below shows an example of how the algorithm compares to using k-means.</p>
 <div style="text-align: center;">
-<span style="float:left;width: 100%;"> <IMG SRC="./fig/Mini_Batch_Kmeans.png" float="right" ALT="image"> </span>
+<span style="float:left;width: 100%;"> <IMG SRC="Mini_Batch_Kmeans.png" float="right" ALT="image"> </span>
 </div>
 <p><br> <br></p>
 <p>Setting number of keypoints = 300, we again looked at the optimal number of clusters to use and found that many of the machine learning algorithms reached a performance peak at # of clusters = 150. Note that at number of clusters = 300, the performance of each algorithm generally stabilizes. This is intuitive since after the number of clusters surpasses the number of keypoints, the continued increase of clusters becomes rather trivial. (Note: we are not sure why SVM spiked so high after 200 clusters…)</p>
 <div style="text-align: center;">
-<span style="float:left;width: 100%;"> <IMG SRC="./fig/Cluster_Acc_25.png" float="right" ALT="image"> </span>
+<span style="float:left;width: 100%;"> <IMG SRC="Cluster_Acc_25.png" float="right" ALT="image"> </span>
 </div>
 <p><br> <br></p>
 <p><strong>Optimal number of clusters = 150</strong></p>
@@ -230,7 +230,7 @@ The baseline model we’re using is a straightforward SVM using color histograms
 <li>Linear discriminant analysis had an average of 72.06% accuracy</li>
 </ul>
 <div style="text-align: center;">
-<span style="float:left;width: 100%;"> <IMG SRC="./fig/R_Accuracy.png" float="right" ALT="image"> </span>
+<span style="float:left;width: 100%;"> <IMG SRC="R_Accuracy.png" float="right" ALT="image"> </span>
 </div>
 <p><br> <br></p>
 <p>We chose random forest for several reasons:</p>
