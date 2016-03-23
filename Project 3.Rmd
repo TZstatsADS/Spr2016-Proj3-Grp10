@@ -1,0 +1,118 @@
+---
+title: "Group 10 Project 3"
+date: "March, 23, 2016"
+output: html_document
+---
+
+## Cat and Dog Classification
+
+### Baseline Model
+#### Linear SVM
+```{r}
+# Load packages
+library(e1071)
+
+# Load data
+load("./data/COLOR_FEATURE.RData")
+load("./data/y_cat.RData")
+load("./data/dir_names.RData")
+
+# Clean data
+index <- sample(1 : length(y_cat), length(y_cat))
+y <- y_cat[index]
+x <- color_feature[index, ]
+
+# Set up classification parameters
+n <- length(y)
+train.n <- round(0.8 * n)
+train.ix <- sort(sample(1 : n, train.n))
+train.x <- x[train.ix, ]
+test.x <- x[-train.ix, ]
+train.y <- as.factor(y[train.ix])
+test.y <- as.factor(y[-train.ix])
+cost <- 2 ^ seq(-10, 10, 1)
+# cost <- c(25) # This was the best cost we found
+gamma <- 10 ^ (-5 : -1)
+
+# Linear SVM Error Rate
+err.linear <- function(train.x, train.y, cost, K) {
+  ix <- sample(1 : length(train.y))
+  begin <- 1 + seq(0,K-1) * round(length(train.y) / K)
+  end <- begin + round(length(train.y) / K) - 1
+  len <- length(cost)
+  err <- rep(0, len)
+  for (i in 1 : len) {
+    for (k in 1 : K) {
+      test.ix <- ix[begin[k] : end[k]]
+      train.ix <- ix[-(begin[k] : end[k])]
+      m <- svm(train.x[train.ix, ], train.y[train.ix], type = 'C',
+             kernel = 'linear', cost = cost[i], gamma = 0)
+      y_hat <- predict(m, train.x[test.ix, ])
+      err[i] <- err[i] + sum(y_hat != train.y[test.ix]) / length(train.y[test.ix])
+    }
+  } 
+  err <- err / K
+  return(err)
+}
+
+# Linear SVM
+err_lin <- err.linear(train.x, train.y , cost, 5)
+plot(cost, err_lin, type = "l") # Plots error rate for a linear svm versus cost
+best_cost <- cost[which.min(err_lin)]
+svm_linear <- svm(train.x, train.y, type = 'C', kernel ='linear', cost = cost, gamma = 0)
+y1 <- predict(svm_linear, test.x)
+
+cost
+sum(y1 != test.y) / length(test.y) 
+```
+
+### Our Improved Model
+
+#### Approach
+![image](./fig/Model_selection_plan.jpg)
+```{r}
+
+```
+##### Feature extraction
+```{r}
+
+```
+##### Model training
+```{r}
+
+```
+##### Classification
+```{r}
+
+```
+#### Performance improvement
+
+#### Running cost tradeoff
+
+### Conclusion
+
+
+
+
+
+
+
+
+
+
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+summary(cars)
+```
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
