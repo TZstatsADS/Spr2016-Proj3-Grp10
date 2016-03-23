@@ -131,7 +131,7 @@ The baseline model we’re using is a straightforward SVM using color histograms
 <li>Average accuracy for SVM + color histogram: 67.73%</li>
 <li>Average training and testing time for SVM + color histogram: 70.10 seconds</li>
 </ul>
-<p>But we can do better!!</p>
+<p><strong>But we can do better!!</strong></p>
 </div>
 </div>
 <div id="our-pipeline" class="section level3">
@@ -145,6 +145,14 @@ The baseline model we’re using is a straightforward SVM using color histograms
 <div id="cropped-images" class="section level4">
 <h4>Cropped Images</h4>
 <p>Cropped images were chosen for several reasons. For one, cropping reduces the computation time for training by decreasing the amount of data that is required to process an image. Second, and one of the most important, in order for us to create our visual vocabulary (codebook), we wanted our model to be very accurate and we knew that the main difference between cats and dogs are their facial features. One drawback from this method, however, was that we also had to limit the number of images we could train from. Also, the image split between cats and dogs was around 23 : 67, which could lead to bias in our results.</p>
+<div style="text-align: center;">
+<span style="float:left;width: 50%;"> <IMG SRC="boxer_129.jpg" height="200px" width="200px"> </span> <span style="float:right;width: 50%;"> <IMG SRC="boxer_129crop.jpg" height="200px" width="200px"> </span>
+</div>
+<br> <br>
+<div style="text-align: center;">
+<span style="float:left;width: 50%;"> <b>Full image</b> </span> <span style="float:right;width: 50%;"> <b>Cropped image</b> </span>
+</div>
+<p><br> <br></p>
 </div>
 <div id="haar-cascade-classifiers" class="section level4">
 <h4>Haar Cascade Classifiers</h4>
