@@ -49,7 +49,7 @@ Yusen Wang did the following:
 * Explored how to load Python code in R. If having trouble with rPython package, one perfect solution is opening R in mac terminal and using system() function to run .py file. 
 * Explored advanced image analysis using opencv. 
 * Assisted in extracting SIFT features, especially in combining multi key points of faces into one rectangle. Found a solution to successfully run groupRectangles() in Python without crush. 
-* Assisted in writing train.R and test.R, extracting color features of test image, and debugging. 
+* Assisted in writing train.R and test.R, extracting color features of test images, and debugging. 
 
 
 
