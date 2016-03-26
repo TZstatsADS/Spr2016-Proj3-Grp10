@@ -28,7 +28,7 @@ Please see each subfolder for a README file.
 
 Project 3 - Team 10
 
-Team members: Bob Minnich
+Team members: Bob Minnich, Yusen Wang
 
 Summary: In this project, we investigated the affects of feature selection and model selection to determine if a cat or a dog appeared in an image. We explored many different possibilites and weighed the tradeoffs of accuracy versus speed during the classification process.
 
@@ -41,4 +41,15 @@ Bob Minnich did the following:
 * Used Cross Validation with 5 K-fold to determine values for the number of clusters for K-Means detection. Choose faster, sampling method of K-Means called Mini Batch K-Means to greatly improve cluster finding speed.
 * Used Cross Validation  with 5 K-fold to test multiple machine learning algorithms on image vocabulary (Random Forests, Gaussian Naïve Bayes, Linear Discriminant Analysis, Quadratic Discriminant Analysis, Neural Networks and SVM)  and determined Random Forests to be the best algorithm for accuray.
 * Assisted in preparing presentation, presented presentation.
+
+Yusen Wang did the following:
+* Focused on building baseline model with appropriate color features.
+* Used R to extract RGB color features, HSV color features and spatial color features.
+* Used Python to compare different machine learning models’ (Average Perceptron, SVM with rbf kernel, SVM with linear kernel, SVM with polynomial kernel, Linear Discriminant Analysis, Quadratic Discriminant Analysis) performance on each one of the three color features. Used 5-fold cross validation to avoid over-fitting. Selected the best model based on CV error rate and running time. 
+* Explored how to load Python code in R. If having trouble with rPython package, one perfect solution is opening R in mac terminal and using system() function to run .py file. 
+* Explored advanced image analysis using opencv. 
+* Assisted in extracting SIFT features, especially in combining multi key points of faces into one rectangle. Found a solution to successfully run groupRectangles() in Python without crush. 
+* Assisted in writing train.R and test.R, extracting color features of test image, and debugging. 
+
+
 
