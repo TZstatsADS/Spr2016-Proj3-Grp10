@@ -28,7 +28,7 @@ Please see each subfolder for a README file.
 
 Project 3 - Team 10
 
-Team members: Bob Minnich, Yusen Wang
+Team members: Bob Minnich, Yusen Wang, Aoyuan Liao
 
 Summary: In this project, we investigated the affects of feature selection and model selection to determine if a cat or a dog appeared in an image. We explored many different possibilites and weighed the tradeoffs of accuracy versus speed during the classification process.
 
@@ -49,7 +49,15 @@ Yusen Wang did the following:
 * Explored how to load Python code in R. If having trouble with rPython package, one perfect solution is opening R in mac terminal and using system() function to run .py file. 
 * Explored advanced image analysis using opencv. 
 * Assisted in extracting SIFT features, especially in combining multi key points of faces into one rectangle. Found a solution to successfully run groupRectangles() in Python without crush. 
-* Assisted in writing train.R and test.R, extracting color features of test images, and debugging. 
+* Assisted in writing train.R and test.R, extracting color features of test images, and debugging.
 
+Aoyuan Liao did the following:
+* Trained the baseline model with choosen RGB color features in R.
+* Explored the difference of accuracy when using different color features (RGB, HSV and spatial color features) with 5-fold cross validation and determined the best color histogram with the appropriate bin size.
+* Performed parameters tuning for the baseline model (linear SVM) with 5-fold cross validation using both color features and SIFT features and compared the difference of accuray and running time when using different features in our baseline model.
+* Explored other machine learning models' (RBF SVM, Adaboost, Random Forest) performance for accuracy and running time on color features and SIFT futures in R. Used 5-fold cross validation to estimate prediction accuracy and avoid overfitting. Selected the best model and the best features based on estimated prediction accuracy and training time.
+* Used principal component analysis to explore the amount of data variability that different numbers of principal components account for. Found appropriate numbers of pricipal components to represent variability within color features and SIFT features.
+* Wrote train.R, test.R for model evaluation. Extracted color features for test images.
+* Assisted in choosing best values for the number of keypoints and for the number of clusters in K-Means detection.
 
 
